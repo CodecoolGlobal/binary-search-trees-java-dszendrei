@@ -5,13 +5,11 @@ public class BSTNode {
     int value;
     BSTNode leftNode;
     BSTNode rightNode;
-    BSTNode parentNode;
 
-    BSTNode(int value, BSTNode parentNode) {
+    BSTNode(int value) {
         this.value = value;
         rightNode = null;
         leftNode = null;
-        this.parentNode = parentNode;
     }
 
     @Override
@@ -20,7 +18,6 @@ public class BSTNode {
                 "value=" + value +
                 ", leftNodeValue=" + leftNodeValue() +
                 ", rightNodeValue=" + rightNodeValue() +
-                ", parentNodeValue=" + parentNodeValue() +
                 '}';
     }
 
@@ -34,8 +31,4 @@ public class BSTNode {
         return null;
     }
 
-    private Integer parentNodeValue(){
-        if (parentNode != null) return parentNode.value;
-        return null;
-    }
 }

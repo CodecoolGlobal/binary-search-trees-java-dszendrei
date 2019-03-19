@@ -18,12 +18,26 @@ public class Main {
         myTree.build(numbers);
 
         System.out.println("MY TREE: "+myTree.toList());
-        System.out.println(myTree.getNode(9));
+        System.out.println(myTree.getNode(19));
+        System.out.println(myTree.getNode(21));
+        System.out.println(myTree.getNode(23));
+        System.out.println(myTree.getNode(55));
         // write some test code here
-        //System.out.println(myTree.search(7)); // should be true
-        //System.out.println(myTree.search(55)); // should be true
-        //System.out.println(myTree.search(34535)); // should be false
+        System.out.println(myTree.search(7)); // should be true
+        System.out.println(myTree.search(55)); // should be true
+        System.out.println(myTree.search(34535)); // should be false
 
+        myTree.add(4);
+        System.out.println(myTree.search(7)); // should be true
+        System.out.println(myTree.search(55)); // should be true
+        System.out.println(myTree.search(34535)); // should be false
+        System.out.println(myTree.search(4)); // should be false
+
+        myTree.remove(4);
+        System.out.println(myTree.search(7)); // should be true
+        System.out.println(myTree.search(55)); // should be true
+        System.out.println(myTree.search(34535)); // should be false
+        System.out.println(myTree.search(4)); // should be false
 
         System.out.println("done");
     }

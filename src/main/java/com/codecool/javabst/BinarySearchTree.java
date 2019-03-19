@@ -1,24 +1,35 @@
 package com.codecool.javabst;
 
 import javax.management.openmbean.KeyAlreadyExistsException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 // Skeleton for the Binary search tree. Feel free to modify this class.
 public class BinarySearchTree {
-    BSTNode rootNode;
-    Set<Integer> listOfValues = new HashSet<>();
-    BSTNode nodeToGet;
-    BSTNode prevNode = null;
+    private BSTNode rootNode;
+    private Set<Integer> listOfValues = new HashSet<>();
+    private BSTNode nodeToGet;
 
-    public BinarySearchTree build(List<Integer> elements) {
+    public void build(List<Integer> elements) {
         // TODO construct a binary search tree here
         elements.sort(Integer::compareTo);
-        rootNode = new BSTNode(elements.get(elements.size()/2), null);
-        elements.forEach(this::add);
-        return null;
+        rootNode = new BSTNode(elements.get(elements.size()/2));
+        int i = 2;
+        Set<Integer> orderedElements = new LinkedHashSet<>();
+        Integer actualValue;
+        int index;
+        do {
+            index = elements.size()/(i);
+            while (index < elements.size() && index > 0) {
+                actualValue = elements.get(index);
+                orderedElements.add(actualValue);
+                index += elements.size()/(i/2);
+            }
+            i = i*2;
+        } while (index>0);
+        orderedElements.addAll(elements);
+        System.out.println("OE "+orderedElements);
+        orderedElements.forEach(integer -> addRecursive(rootNode, integer));
+
     }
 
     public boolean search(Integer toFind) {
@@ -50,16 +61,25 @@ public class BinarySearchTree {
         else if (toAdd < node.getValue()) node.setPrevNode(new BSTNode(toAdd));
         System.out.println("node after while: "+node);
         */
-        BSTNode node = addRecursive(rootNode, toAdd);
+        //if (search(toAdd)) throw new KeyAlreadyExistsException();
+        //List<Integer> allNodes = toList();
+        //allNodes.add(toAdd);
+        //allNodes.sort(Integer::compareTo);
+        //rootNode = new BSTNode(allNodes.get(allNodes.size()/2), null);
+        toList();
+        listOfValues.add(toAdd);
+        List<Integer> elements = new ArrayList<>(listOfValues);
+        elements.sort(Integer::compareTo);
+        build(elements);
     }
 
     private BSTNode addRecursive(BSTNode current, int value) {
         if (current == null) {
-            BSTNode nodeToAdd = new BSTNode(value, prevNode);
+            BSTNode nodeToAdd = new BSTNode(value);
             //checkLayer(nodeToAdd);
             return nodeToAdd;
         }
-        prevNode = current;
+        BSTNode prevNode = current;
         if (value < current.value) {
             current.leftNode = addRecursive(current.leftNode, value);
         } else if (value > current.value) {
@@ -73,16 +93,20 @@ public class BinarySearchTree {
 
     public void remove(Integer toRemove) {
         // TODO removes an element. Throws an error if its not on the tree.
+        toList();
+        listOfValues.remove(toRemove);
+        List<Integer> elements = new ArrayList<>(listOfValues);
+        elements.sort(Integer::compareTo);
+        build(elements);
     }
 
     public List<Integer> toList() {
-        //Set<Integer> listOfValues = new HashSet<>();
-        BSTNode node = addRecursiveToList(rootNode);
+        listOfValues = new HashSet<>();
+        addRecursiveToList(rootNode);
         return new ArrayList<>(listOfValues);
     }
 
     private BSTNode addRecursiveToList(BSTNode current) {
-        System.out.println(current.value);
         listOfValues.add(current.value);
         if(current.leftNode != null) {
             if (!listOfValues.contains(current.leftNode.value)) {
@@ -94,7 +118,6 @@ public class BinarySearchTree {
                 current.rightNode = addRecursiveToList(current.rightNode);
             }
         } else {
-            System.out.println("SUBKEY ALREADY EXISTS");
             return current;
         }
 
@@ -114,7 +137,7 @@ public class BinarySearchTree {
                 ? containsNodeRecursive(current.leftNode, value)
                 : containsNodeRecursive(current.rightNode, value);
     }
-
+/*
     private void checkLayer(BSTNode node) {
         BSTNode parentNode;
         BSTNode grandParentNode;
@@ -131,6 +154,6 @@ public class BinarySearchTree {
                 }
             }
         }
-    }
+    }*/
 
 }
