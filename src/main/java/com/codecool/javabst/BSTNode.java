@@ -1,5 +1,7 @@
 package com.codecool.javabst;
 
+import java.util.Objects;
+
 public class BSTNode {
 
     int value;
@@ -31,4 +33,18 @@ public class BSTNode {
         return null;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BSTNode node = (BSTNode) o;
+        return value == node.value &&
+                Objects.equals(leftNodeValue(), node.leftNodeValue()) &&
+                Objects.equals(rightNodeValue(), node.rightNodeValue());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value, leftNode, rightNode);
+    }
 }

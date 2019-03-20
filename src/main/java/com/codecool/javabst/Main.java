@@ -1,15 +1,11 @@
 package com.codecool.javabst;
 
-import java.io.IOException;
 import java.util.ArrayList;
-
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
-
+    public static void main(String[] args) {
         ArrayList<Integer> numbers = new ArrayList<>();
-
         for (int i = 0; i < 50; i++) {
             numbers.add(i * 2 + 5);
         }
@@ -22,7 +18,6 @@ public class Main {
         System.out.println(myTree.getNode(21));
         System.out.println(myTree.getNode(23));
         System.out.println(myTree.getNode(55));
-        // write some test code here
         System.out.println(myTree.search(7)); // should be true
         System.out.println(myTree.search(55)); // should be true
         System.out.println(myTree.search(34535)); // should be false
@@ -31,7 +26,8 @@ public class Main {
         System.out.println(myTree.search(7)); // should be true
         System.out.println(myTree.search(55)); // should be true
         System.out.println(myTree.search(34535)); // should be false
-        System.out.println(myTree.search(4)); // should be false
+        System.out.println(myTree.search(4)); // should be true
+        myTree.add(4);
 
         myTree.remove(4);
         System.out.println(myTree.search(7)); // should be true
