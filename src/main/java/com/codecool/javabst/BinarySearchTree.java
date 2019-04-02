@@ -25,7 +25,6 @@ public class BinarySearchTree {
             i = i*2;
         } while (index>0);
         orderedElements.addAll(elements);
-        System.out.println("Ordered Elements: "+orderedElements);
         orderedElements.forEach(integer -> addRecursive(rootNode, integer));
 
     }

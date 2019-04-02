@@ -27,7 +27,6 @@ public class Main {
         System.out.println(myTree.search(55)); // should be true
         System.out.println(myTree.search(34535)); // should be false
         System.out.println(myTree.search(4)); // should be true
-        myTree.add(4);
 
         myTree.remove(4);
         System.out.println(myTree.search(7)); // should be true
